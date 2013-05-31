@@ -1,5 +1,5 @@
 [Unit]
-Description=Sabayon installer setup
+Description=Rogentos installer setup
 Before=display-manager.service
 After=rogentoslive.service
 

@@ -3,5 +3,5 @@ Type=Application
 Name=rogentos-loader
 Exec=rogentos-welcome-loader
 Icon=system-run
-Comment=Sabayon Linux post-install Welcome Screen
+Comment=Rogentos Linux post-install Welcome Screen
 Terminal=false

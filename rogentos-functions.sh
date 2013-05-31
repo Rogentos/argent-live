@@ -116,7 +116,7 @@ rogentos_setup_live_user() {
 			done
 		done
 		# then setup live user, that is missing
-		useradd -d "/home/${live_user}" -g root -G ${live_groups} -c "Sabayon" \
+		useradd -d "/home/${live_user}" -g root -G ${live_groups} -c "rogentosuser" \
 			-m -N -p "" -s /bin/bash ${live_uid} "${live_user}"
 		return 0
 	fi
@@ -231,7 +231,7 @@ rogentos_setup_text_installer() {
 }
 
 rogentos_setup_text_installer_motd() {
-	echo "Welcome to Sabayon Linux Text installation." >> /etc/motd
+	echo "Welcome to Rogentos Linux Text installation." >> /etc/motd
 	echo "to run the installation type: installer <and PRESS ENTER>" >> /etc/motd
 }
 

@@ -28,7 +28,7 @@ function menu
         echo ""
         echo "1 - Backup & edit xorg.conf and xorg.conf.d"
         echo "2 - Restore xorg.conf and xorg.conf.d from backup"
-        echo "3 - Regenerate Sabayon xorg.conf"
+        echo "3 - Regenerate Rogentos xorg.conf"
         echo "4 - Backup & edit grub.cfg"
         echo "5 - Restore grub.cfg from backup"
         echo "----------------------------------------"
@@ -368,14 +368,15 @@ function grub_restore
         echo "The original grub.cfg has been restored"
     else
         echo "UH OH!! The backup script /boot/grub/grub.cfg.BKUP hasn't been made."
-        echo "Don't panic, you can use the Sabayon installer to repair GRUB."
+        echo "Don't panic, you can use the Rogentos installer to repair GRUB."
     fi
 }
 
 function horner
 {
 
-# Quick system info gatherer written for Sabayon GNU/Linux
+# Quick system info gatherer written for Sabayon GNU/Linux and
+# adaptaed for RogentOS and Argent GNU/Linux
 #(http://sabayonlinux.org)
 # Copyright 2008 Richard Edward Horner
 # Last modified 2008-11-26

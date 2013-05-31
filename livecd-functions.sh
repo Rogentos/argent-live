@@ -255,7 +255,7 @@ livecd_config_ip() {
 
 livecd_write_net_conf() {
 	cd /tmp/setup.opts
-	echo "# Sabayon Linux static network configuration tool" > /etc/conf.d/net
+	echo "# Rogentos Linux static network configuration tool" > /etc/conf.d/net
 	DHCP=$(tail -n 1 ${iface}.DHCP)
 	case ${DHCP} in
 		1)
