@@ -1,10 +1,10 @@
 #!/bin/sh
 
-SABAYON_LOADER="/usr/bin/xdg-open"
-SABAYON_URL=${SABAYON_URL:-http://www.rogentos.ro?install_welcome=1}
+ROGENTOS_LOADER="/usr/bin/xdg-open"
+ROGENTOS_URL=${ROGENTOS_URL:-http://www.rogentos.ro?install_welcome=1}
 
 # load Sabayon URL
-[[ -x "${SABAYON_LOADER}" ]] && ${SABAYON_LOADER} ${SABAYON_URL} &
+[[ -x "${ROGENTOS_LOADER}" ]] && ${ROGENTOS_LOADER} ${ROGENTOS_URL} &
 
 # remove myself from autostart
 rm ~/.config/autostart/rogentos-welcome-loader.desktop -f
