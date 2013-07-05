@@ -1,5 +1,5 @@
 [Unit]
-Description=Sabayon text installer setup
+Description=RogentOS text installer setup
 After=rogentoslive.service
 
 [Service]

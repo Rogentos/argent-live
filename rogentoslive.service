@@ -1,5 +1,5 @@
 [Unit]
-Description=Sabayon live system setup
+Description=RogentOS live system setup
 Before=display-manager.service getty.target
 
 [Service]
