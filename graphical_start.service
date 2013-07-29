@@ -3,7 +3,7 @@ Description=Graphical Starter Config File
 After=rogentoslive.service
 
 [Service]
-ExecStart=/usr/sbin/graphical_start.sh
+ExecStart=/usr/libexec/graphical_start.sh
 Type=simple
 
 [Install]
