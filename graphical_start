@@ -1,0 +1,13 @@
+#!/sbin/runscript
+# Copyright 2013 RogentOS and Argent
+# Distributed under the terms of the GNU General Public License v2
+
+depend() {
+	after rogentoslive
+}
+
+start() {
+	ebegin "Starting the Graphical Interface"
+	/usr/libexec/graphical_start.sh
+	eend $?
+}
