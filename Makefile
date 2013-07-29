@@ -24,6 +24,7 @@ install:
 	install -m 0755 rogentoslive.sh $(DESTDIR)/$(LIBEXECDIR)/
 	install -m 0755 x-setup.sh $(DESTDIR)/$(LIBEXECDIR)/
 	install -m 0755 cdeject.sh $(DESTDIR)/$(LIBEXECDIR)/
+	install -m 0755 graphical_start.sh ${DESTDIR}/${LIBEXECDIR}/
 
 	install -d $(DESTDIR)/$(SBINDIR)
 	install -d $(DESTDIR)/$(BINDIR)
@@ -49,6 +50,7 @@ install:
 
 	install -d $(DESTDIR)/$(SYSV_INITDIR)/
 	install -m 0755 x-setup-init.d $(DESTDIR)/$(SYSV_INITDIR)/x-setup
+	install -m 0755 graphical_start ${DESTDIR}/${SYSV_INITDIR}
 	install -m 0755 rogentoslive $(DESTDIR)/$(SYSV_INITDIR)/
 	install -m 0755 installer-gui $(DESTDIR)/$(SYSV_INITDIR)/
 	install -m 0755 installer-text $(DESTDIR)/$(SYSV_INITDIR)/
