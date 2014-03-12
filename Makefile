@@ -25,7 +25,7 @@ install:
 	install -m 0755 x-setup.sh $(DESTDIR)/$(LIBEXECDIR)/
 	install -m 0755 cdeject.sh $(DESTDIR)/$(LIBEXECDIR)/
 	install -m 0755 graphical_start.sh ${DESTDIR}/${LIBEXECDIR}/
-        install -m 0755 whatever.sh ${DESTDIR}/${LIBEXECDIR}/
+	install -m 0755 whatever.sh ${DESTDIR}/${LIBEXECDIR}/
 
 	install -d $(DESTDIR)/$(SBINDIR)
 	install -d $(DESTDIR)/$(BINDIR)
