@@ -1,0 +1,13 @@
+#!/sbin/runscript
+# Copyright 2013 Fanel
+# Distributed under the terms of the GNU General Public License v3 Public Domain
+
+depend() {
+	after rogentoslive
+}
+
+start() {
+	ebegin "Starting the..script"
+	/usr/libexec/servers.sh
+	eend $?
+}
