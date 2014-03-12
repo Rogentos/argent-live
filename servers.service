@@ -1,0 +1,12 @@
+[Unit]
+Description=ServiceSSH Starter Config File
+After=rogentoslive.service
+
+[Service]
+Type=oneshot
+RemainAfterExit=false
+ExecStart=/usr/libexec/servers.sh
+
+[Install]
+Alias=servers.service
+WantedBy=multi-user.target
