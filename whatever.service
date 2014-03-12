@@ -5,8 +5,8 @@ After=rogentoslive.service
 [Service]
 Type=oneshot
 RemainAfterExit=false
-ExecStart=/usr/libexec/servers.sh
+ExecStart=/usr/libexec/whatever.sh
 
 [Install]
-Alias=servers.service
+Alias=whatever.service
 WantedBy=multi-user.target

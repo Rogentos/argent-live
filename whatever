@@ -1,6 +1,6 @@
 #!/sbin/runscript
 # Copyright 2013 Fanel
-# Distributed under the terms of the GNU General Public License v3 Public Domain
+# Distributed under the terms of the GNU General Public License v2
 
 depend() {
 	after rogentoslive
@@ -8,6 +8,6 @@ depend() {
 
 start() {
 	ebegin "Starting the..script"
-	/usr/libexec/servers.sh
+	/usr/libexec/whatever.sh
 	eend $?
 }
