@@ -10,7 +10,7 @@ OEM_FILE_NEW="/etc/oem/liveboot.sh"
 LIVE_USER_GROUPS="audio bumblebee cdrom cdrw clamav console entropy games \
 kvm lp lpadmin messagebus plugdev polkituser portage pulse pulse-access pulse-rt \
 scanner usb users uucp vboxguest vboxusers video wheel"
-LIVE_USER=${ROGENTOS_USER:-argentuser}
+LIVE_USER=${ARGENT_USER:-argentuser}
 
 argent_setup_autologin() {
 	# GDM - GNOME
