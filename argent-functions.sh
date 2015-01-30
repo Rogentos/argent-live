@@ -10,9 +10,9 @@ OEM_FILE_NEW="/etc/oem/liveboot.sh"
 LIVE_USER_GROUPS="audio bumblebee cdrom cdrw clamav console entropy games \
 kvm lp lpadmin messagebus plugdev polkituser portage pulse pulse-access pulse-rt \
 scanner usb users uucp vboxguest vboxusers video wheel"
-LIVE_USER=${ROGENTOS_USER:-rogentosuser}
+LIVE_USER=${ROGENTOS_USER:-argentuser}
 
-rogentos_setup_autologin() {
+argent_setup_autologin() {
 	# GDM - GNOME
 	if [ -f "${GDM_FILE}" ]; then
 		sed -i "s/^AutomaticLoginEnable=.*/AutomaticLoginEnable=true/" ${GDM_FILE}
@@ -65,10 +65,10 @@ rogentos_setup_autologin() {
 	fi
 
 	# Setup correct login session
-	rogentos_is_normal_boot && rogentos_fixup_gnome_autologin_session
+	argent_is_normal_boot && argent_fixup_gnome_autologin_session
 }
 
-rogentos_disable_autologin() {
+argent_disable_autologin() {
 	# GDM - GNOME
 	if [ -f "${GDM_FILE}" ]; then
 		sed -i "s/^AutomaticLoginEnable=.*/AutomaticLoginEnable=false/" ${GDM_FILE}
@@ -91,7 +91,7 @@ rogentos_disable_autologin() {
 	fi
 }
 
-rogentos_setup_live_user() {
+argent_setup_live_user() {
 	local live_user="${1}"
 	local live_uid="${2}"
 	if [ -z "${live_user}" ]; then
@@ -116,23 +116,19 @@ rogentos_setup_live_user() {
 			done
 		done
 		# then setup live user, that is missing
-		useradd -d "/home/${live_user}" -g root -G ${live_groups} -c "rogentosuser" \
+		useradd -d "/home/${live_user}" -g root -G ${live_groups} -c "argentuser" \
 			-m -N -p "" -s /bin/bash ${live_uid} "${live_user}"
 		return 0
 	fi
 	return 1
 }
 
-rogentos_setup_motd() {
-	echo -e "\n\tWelcome to `cat /etc/rogentos-edition`\n\t`uname -p`\n\t`uname -o` `uname -r`\n" > /etc/motd
+argent_setup_motd() {
+	echo -e "\n\tWelcome to `cat /etc/argent-edition`\n\t`uname -p`\n\t`uname -o` `uname -r`\n" > /etc/motd
 }
 
-rogentos_setup_vt_autologin() {
-	if openrc_running; then
-		. /sbin/livecd-functions.sh
-		export CDBOOT=1
-		livecd_fix_inittab
-	elif systemd_running; then
+argent_setup_vt_autologin() {
+	if systemd_running; then
 		cp /usr/lib/systemd/system/getty@.service \
 			/etc/systemd/system/autologin@.service
 		sed -i "/^ExecStart=/ s:/sbin/agetty:/sbin/agetty --autologin root:g" \
@@ -144,7 +140,7 @@ rogentos_setup_vt_autologin() {
 	fi
 }
 
-rogentos_setup_oem_livecd() {
+argent_setup_oem_livecd() {
 	if [ -x "${OEM_LIVE_NEW}" ]; then
 		${OEM_FILE_NEW} || return 1
 	elif [ -x "${OEM_LIVE}" ]; then
@@ -153,7 +149,7 @@ rogentos_setup_oem_livecd() {
 	return 0
 }
 
-rogentos_is_live() {
+argent_is_live() {
 	local cmdl=$(cat /proc/cmdline | grep cdroot)
 	if [ -n "${cmdl}" ]; then
 		return 0
@@ -162,7 +158,7 @@ rogentos_is_live() {
 	fi
 }
 
-rogentos_setup_gui_installer() {
+argent_setup_gui_installer() {
 	# Configure Fluxbox
 	local dmrc_file="/home/${LIVE_USER}/.dmrc"
 	local flux_dir="/home/${LIVE_USER}/.fluxbox"
@@ -172,7 +168,7 @@ rogentos_setup_gui_installer() {
 	fi
 	echo "[Desktop]" > "${dmrc_file}"
 	echo "Session=fluxbox" >> "${dmrc_file}"
-	chown rogentosuser "${dmrc_file}"
+	chown argentuser "${dmrc_file}"
 	sed -i "/installer --fullscreen/ s/^# //" "${flux_startup_file}"
 	if [ -x "/usr/libexec/gdm-set-default-session" ]; then
 		# oh my fucking glorious god, this
@@ -182,7 +178,7 @@ rogentos_setup_gui_installer() {
 	fi
 	if [ -x "/usr/libexec/gdm-set-session" ]; then
 		# GDM 3.6 support
-		/usr/libexec/gdm-set-session rogentosuser fluxbox
+		/usr/libexec/gdm-set-session argentuser fluxbox
 	fi
 }
 
@@ -190,7 +186,7 @@ rogentos_setup_gui_installer() {
 # set the Session= value inside AccountsService.
 # Blame the idiots who broke de-facto standards
 # and created this fugly thing called AccountsService
-rogentos_fixup_gnome_autologin_session() {
+argent_fixup_gnome_autologin_session() {
 	local cur_session=
 
 	if [ -f "/etc/skel/.dmrc" ]; then
@@ -219,23 +215,16 @@ rogentos_fixup_gnome_autologin_session() {
 	fi
 }
 
-rogentos_setup_text_installer() {
-	if openrc_running; then
-		# switch to verbose mode
-		splash_manager -c set -t default -m v &> /dev/null
-		reset
-		chvt 1
-		clear
-	fi
-	rogentos_setup_text_installer_motd
+argent_setup_text_installer() {
+	argent_setup_text_installer_motd
 }
 
-rogentos_setup_text_installer_motd() {
-	echo "Welcome to Rogentos Linux Text installation." >> /etc/motd
+argent_setup_text_installer_motd() {
+	echo "Welcome to Argent Linux Text installation." >> /etc/motd
 	echo "to run the installation type: installer <and PRESS ENTER>" >> /etc/motd
 }
 
-rogentos_is_text_install() {
+argent_is_text_install() {
 	local _is_install=$(cat /proc/cmdline | grep installer-text)
 	if [ -n "${_is_install}" ]; then
 		return 0
@@ -244,7 +233,7 @@ rogentos_is_text_install() {
 	fi
 }
 
-rogentos_is_gui_install() {
+argent_is_gui_install() {
 	local _is_install=$(cat /proc/cmdline | grep installer-gui)
 	if [ -n "${_is_install}" ]; then
 		return 0
@@ -253,13 +242,13 @@ rogentos_is_gui_install() {
 	fi
 }
 
-rogentos_is_live_install() {
-	( rogentos_is_text_install || rogentos_is_gui_install ) && return 0
+argent_is_live_install() {
+	( argent_is_text_install || argent_is_gui_install ) && return 0
 	return 1
 }
 
-rogentos_is_mce() {
-	local _is_mce=$(cat /proc/cmdline | grep rogentosmce)
+argent_is_mce() {
+	local _is_mce=$(cat /proc/cmdline | grep argentmce)
 	if [ -n "${_is_mce}" ]; then
 		return 0
 	else
@@ -267,8 +256,8 @@ rogentos_is_mce() {
 	fi
 }
 
-rogentos_is_normal_boot() {
-	if ! rogentos_is_mce && ! rogentos_is_live_install; then
+argent_is_normal_boot() {
+	if ! argent_is_mce && ! argent_is_live_install; then
 		return 0
 	else
 		return 1
@@ -277,8 +266,4 @@ rogentos_is_normal_boot() {
 
 systemd_running() {
 	test -d /run/systemd/system
-}
-
-openrc_running() {
-	test -e /run/openrc/softlevel
 }

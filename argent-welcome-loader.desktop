@@ -1,0 +1,7 @@
+[Desktop Entry]
+Type=Application
+Name=argent-loader
+Exec=argent-welcome-loader
+Icon=system-run
+Comment=Argent Linux post-install Welcome Screen
+Terminal=false

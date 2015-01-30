@@ -1,6 +1,6 @@
 #!/bin/bash
 
-. /sbin/rogentos-functions.sh
+. /sbin/argent-functions.sh
 
 CMDLINE=$(cat /proc/cmdline 2> /dev/null)
 
@@ -19,17 +19,13 @@ setup_x() {
 
 setup_settingsd() {
     if [ -e /usr/share/eselect/modules/settingsd.eselect ]; then
-        if systemd_running; then
-            eselect settingsd set systemd > /dev/null
-        elif openrc_running; then
-            eselect settingsd set openrc > /dev/null
-        fi
+	eselect settingsd set systemd > /dev/null
     fi
 }
 
 setup_desktop() {
     # create LIVE_USER if it does not exist
-    rogentos_setup_live_user "${LIVE_USER}" "1000"
+    argent_setup_live_user "${LIVE_USER}" "1000"
     if [ "${?}" = "1" ]; then
         # if user is already available, then setup skel
         # Copy ${LIVE_USER} directory
@@ -100,10 +96,6 @@ setup_keymap() {
     if [ -n "${keymap_toset}" ]; then
         aggregated_keymap="${keymap_toset}${keymap_toset_model}"
         /sbin/keyboard-setup-2 "${aggregated_keymap}" all &> /dev/null
-        if [ "${?}" = "0" ]; then
-            openrc_running && /etc/init.d/keymaps restart --nodeps
-            # systemd not needed here, this script runs before vconsole-setup
-        fi
     fi
 }
 
@@ -152,10 +144,10 @@ setup_locale() {
 
 
 main() {
-    . /sbin/rogentos-functions.sh
+    . /sbin/argent-functions.sh
 
     # Perform configuration only in live mode
-    if ! rogentos_is_live; then
+    if ! argent_is_live; then
         echo "Skipping Live system configuration"
         return 0
     fi
@@ -168,10 +160,10 @@ main() {
     # MOVED HERE TO AVOID RACE CONDITIONS ON WRITING
     # /etc/profile.env variables
     setup_locale
-    rogentos_setup_autologin
-    rogentos_setup_motd
-    rogentos_setup_vt_autologin
-    rogentos_setup_oem_livecd
+    argent_setup_autologin
+    argent_setup_motd
+    argent_setup_vt_autologin
+    argent_setup_oem_livecd
 }
 
 main
