@@ -8,7 +8,6 @@ BINDIR ?= /bin
 LIBEXECDIR ?= /usr/libexec
 SYSCONFDIR ?= /etc
 SYSTEMD_UNITDIR ?= $(LIBDIR)/systemd/system
-SYSV_INITDIR = /etc/init.d
 
 all:
 	for d in $(SUBDIRS); do $(MAKE) -C $$d; done
@@ -21,7 +20,7 @@ install:
 
 	install -d $(DESTDIR)/$(LIBEXECDIR)
 	install -m 0755 installer-{text,gui}.sh $(DESTDIR)/$(LIBEXECDIR)/
-	install -m 0755 rogentoslive.sh $(DESTDIR)/$(LIBEXECDIR)/
+	install -m 0755 argentlive.sh $(DESTDIR)/$(LIBEXECDIR)/
 	install -m 0755 x-setup.sh $(DESTDIR)/$(LIBEXECDIR)/
 	install -m 0755 cdeject.sh $(DESTDIR)/$(LIBEXECDIR)/
 	install -m 0755 graphical_start.sh ${DESTDIR}/${LIBEXECDIR}/
@@ -39,19 +38,11 @@ install:
 	install -d $(DESTDIR)/$(UBINDIR)
 	install -m 0755 livespawn $(DESTDIR)/$(UBINDIR)/
 	install -m 0755 sabutil $(DESTDIR)/$(UBINDIR)/
-	install -m 0755 rogentos-live-check $(DESTDIR)/$(UBINDIR)/
-	install -m 0755 rogentos-welcome-loader $(DESTDIR)/$(UBINDIR)/
+	install -m 0755 argent-live-check $(DESTDIR)/$(UBINDIR)/
+	install -m 0755 argent-welcome-loader $(DESTDIR)/$(UBINDIR)/
 
-	install -d $(DESTDIR)/$(SYSCONFDIR)/rogentos
-	install -m 0644 rogentos-welcome-loader.desktop $(DESTDIR)/$(SYSCONFDIR)/rogentos
+	install -d $(DESTDIR)/$(SYSCONFDIR)/argent
+	install -m 0644 argent-welcome-loader.desktop $(DESTDIR)/$(SYSCONFDIR)/argent
 
 	install -d $(DESTDIR)/$(SYSTEMD_UNITDIR)/
 	install -m 0644 *.service $(DESTDIR)/$(SYSTEMD_UNITDIR)/
-
-	install -d $(DESTDIR)/$(SYSV_INITDIR)/
-	install -m 0755 x-setup-init.d $(DESTDIR)/$(SYSV_INITDIR)/x-setup
-	install -m 0755 graphical_start ${DESTDIR}/${SYSV_INITDIR}
-	install -m 0755 rogentoslive $(DESTDIR)/$(SYSV_INITDIR)/
-	install -m 0755 installer-gui $(DESTDIR)/$(SYSV_INITDIR)/
-	install -m 0755 installer-text $(DESTDIR)/$(SYSV_INITDIR)/
-	install -m 0755 cdeject $(DESTDIR)/$(SYSV_INITDIR)/

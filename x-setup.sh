@@ -5,7 +5,7 @@ if [ ! -d /proc/bus/pci ]; then
 	exit 0
 fi
 
-. /sbin/rogentos-functions.sh
+. /sbin/argent-functions.sh
 
 REDETECT=$(cat /proc/cmdline | grep "gpudetect")
 

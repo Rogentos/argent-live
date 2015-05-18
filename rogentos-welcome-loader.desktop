@@ -1,7 +1,0 @@
-[Desktop Entry]
-Type=Application
-Name=rogentos-loader
-Exec=rogentos-welcome-loader
-Icon=system-run
-Comment=Rogentos Linux post-install Welcome Screen
-Terminal=false

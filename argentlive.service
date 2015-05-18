@@ -1,11 +1,11 @@
 [Unit]
-Description=RogentOS live system setup
+Description=Argent live system setup
 Before=display-manager.service getty.target
 
 [Service]
 Type=oneshot
 RemainAfterExit=true
-ExecStart=/usr/libexec/rogentoslive.sh
+ExecStart=/usr/libexec/argentlive.sh
 
 [Install]
 WantedBy=multi-user.target

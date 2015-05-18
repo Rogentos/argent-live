@@ -1,6 +1,6 @@
 [Unit]
-Description=RogentOS text installer setup
-After=rogentoslive.service
+Description=Argent text installer setup
+After=argentlive.service
 
 [Service]
 Type=oneshot

@@ -12,10 +12,10 @@ depend() {
 
 
 start() {
-    . /sbin/rogentos-functions.sh
+    . /sbin/argent-functions.sh
 
     ebegin "Configuring GPUs and input devices"
-    if rogentos_is_live; then
+    if argent_is_live; then
         /sbin/gpu-configuration > /dev/null
         eend 0
         return 0

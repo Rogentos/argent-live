@@ -2,6 +2,7 @@
 
 # Initial version by wolfden.
 # Later changes by Enlik <poczta-sn at gazeta.pl>.
+# Later canges by Stefan Cristian B.
 
 # last change: 9.03.2012
 # most important changes to last version:
@@ -18,17 +19,17 @@ function menu
     local selection=""
     until  [[ "$selection" = "0" ]] ; do
         echo "Current Operating System:"
-	cat /etc/rogentos-release
+	cat /etc/argent-release
 	echo ""
         echo "Current Edition:"
-	cat /etc/rogentos-edition
+	cat /etc/argent-edition
         echo
         echo "Pick a choice from menu below:"
 
         echo ""
         echo "1 - Backup & edit xorg.conf and xorg.conf.d"
         echo "2 - Restore xorg.conf and xorg.conf.d from backup"
-        echo "3 - Regenerate Rogentos xorg.conf"
+        echo "3 - Regenerate Argent xorg.conf"
         echo "4 - Backup & edit grub.cfg"
         echo "5 - Restore grub.cfg from backup"
         echo "----------------------------------------"
@@ -98,8 +99,8 @@ function xorg_regen
 {
     is_root || return
 
-    if [[ ! -f "/etc/X11/xorg.conf.rogentos" ]]; then
-        cat > /etc/X11/xorg.conf.rogentos <<EOF
+    if [[ ! -f "/etc/X11/xorg.conf.argent" ]]; then
+        cat > /etc/X11/xorg.conf.argent <<EOF
 Section "Module"
     SubSection  "extmod"
        Option    "omit xfree86-dga"
@@ -368,7 +369,7 @@ function grub_restore
         echo "The original grub.cfg has been restored"
     else
         echo "UH OH!! The backup script /boot/grub/grub.cfg.BKUP hasn't been made."
-        echo "Don't panic, you can use the Rogentos installer to repair GRUB."
+        echo "Don't panic, you can use the Argent installer to repair GRUB."
     fi
 }
 
@@ -376,8 +377,8 @@ function horner
 {
 
 # Quick system info gatherer written for Sabayon GNU/Linux and
-# adapted for RogentOS and Argent GNU/Linux
-#(http://sabayonlinux.org)
+# adapted for Kogaion and Argent GNU/Linux
+#(http://argentlinux.org)
 # Copyright 2008 Richard Edward Horner
 # Last modified 2008-11-26
 # Please send all comments, suggestions, bugs and patches to (rich AT
@@ -397,7 +398,7 @@ function horner
 # along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 HOSTNAME=`hostname`
-RELEASE=`cat /etc/rogentos-release`
+RELEASE=`cat /etc/argent-release`
 CPU=`uname -p`
 KERNEL=`uname -r`
 KERN_ARCH=`uname -m`
@@ -484,7 +485,7 @@ function files_pastebin
 function system_pastebin
 {
     echo -n "Please wait, it is going to take a while..."
-    local PASTE_TMP=/tmp/sabutil-tmp
+    local PASTE_TMP=/tmp/argutil-tmp
 
     >"$PASTE_TMP" || {
 	echo "Oh no! I can't create temporary file... Aborting."
@@ -539,7 +540,7 @@ function fdisk_pastebin
 {
     is_root || return # fdisk -l
 
-    local PASTE_TMP=/tmp/sabutil-tmp
+    local PASTE_TMP=/tmp/argutil-tmp
 
     >"$PASTE_TMP" || {
 	echo "Oh no! I can't create temporary file... Aborting."
@@ -585,7 +586,7 @@ function rclog_pastebin
 
 function rcupdate_pastebin
 {
-    local PASTE_TMP=/tmp/sabutil-tmp
+    local PASTE_TMP=/tmp/argutil-tmp
 
     >"$PASTE_TMP" || {
 	echo "Oh no! I can't create temporary file... Aborting."

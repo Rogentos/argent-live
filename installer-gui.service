@@ -1,7 +1,7 @@
 [Unit]
-Description=Rogentos installer setup
+Description=Argent installer setup
 Before=display-manager.service
-After=rogentoslive.service
+After=argentlive.service
 
 [Service]
 Type=oneshot

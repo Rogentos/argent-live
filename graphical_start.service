@@ -1,6 +1,6 @@
 [Unit]
 Description=Graphical Starter Config File
-After=rogentoslive.service
+After=argentlive.service
 
 [Service]
 Type=oneshot
