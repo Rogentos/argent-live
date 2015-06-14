@@ -1,5 +1,6 @@
 #!/sbin/runscript
 # Copyright 2009-2013 Sabayon
+# Copyright 2015 Argent
 # Distributed under the terms of the GNU General Public License v2
 
 depend() {

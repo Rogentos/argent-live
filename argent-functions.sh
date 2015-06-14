@@ -285,17 +285,8 @@ argent_is_mce() {
     fi
 }
 
-argent_is_steambox() {
-    local _is_steam=$(cat /proc/cmdline | grep steambox)
-    if [ -n "${_is_steam}" ]; then
-        return 0
-    else
-        return 1
-    fi
-}
-
 argent_is_normal_boot() {
-    if ! argent_is_mce && ! argent_is_live_install && ! argent_is_steambox; then
+    if ! argent_is_mce && ! argent_is_live_install ; then
         return 0
     else
         return 1
