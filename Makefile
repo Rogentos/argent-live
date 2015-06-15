@@ -39,7 +39,7 @@ install:
 	
 	install -d $(DESTDIR)/$(UBINDIR)
 	install -m 0755 livespawn $(DESTDIR)/$(UBINDIR)/
-	install -m 0755 sabutil $(DESTDIR)/$(UBINDIR)/
+	install -m 0755 argutil $(DESTDIR)/$(UBINDIR)/
 	install -m 0755 argent-live-check $(DESTDIR)/$(UBINDIR)/
 	install -m 0755 argent-welcome-loader $(DESTDIR)/$(UBINDIR)/
 
