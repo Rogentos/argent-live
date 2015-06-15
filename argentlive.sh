@@ -17,22 +17,10 @@ setup_x() {
     [ -x /sbin/gpu-configuration ] && /sbin/gpu-configuration
 }
 
-setup_settingsd() {
-    if [ -e /usr/share/eselect/modules/settingsd.eselect ]; then
-	eselect settingsd set systemd > /dev/null
-    fi
-}
-
 setup_desktop() {
-    # create LIVE_USER if it does not exist
+    # setup /home persistence
+    argent_setup_home_mount
     argent_setup_live_user "${LIVE_USER}" "1000"
-    if [ "${?}" = "1" ]; then
-        # if user is already available, then setup skel
-        # Copy ${LIVE_USER} directory
-        rm -rf /home/${LIVE_USER}
-        cp /etc/skel /home/${LIVE_USER} -Rp
-        chown ${LIVE_USER}:users /home/${LIVE_USER} -R
-    fi
 
     local liveinst_desktop="/usr/share/applications/liveinst.desktop"
     local liveinst_desktop_name="$(basename ${liveinst_desktop})"
@@ -48,10 +36,8 @@ setup_desktop() {
 
     # Disable memory eating services
     rm -f /etc/xdg/autostart/hplip-systray.desktop \
-        /etc/xdg/autostart/beagle-search-autostart.desktop \
         /etc/xdg/autostart/tracker*.desktop \
         /etc/xdg/autostart/magneto.desktop \
-        /etc/xdg/autostart/beagled-autostart.desktop \
         /usr/share/autostart/magneto.desktop \
         /usr/share/autostart/nepomukserver.desktop
 
@@ -96,6 +82,10 @@ setup_keymap() {
     if [ -n "${keymap_toset}" ]; then
         aggregated_keymap="${keymap_toset}${keymap_toset_model}"
         /sbin/keyboard-setup-2 "${aggregated_keymap}" all &> /dev/null
+        if [ "${?}" = "0" ]; then
+            openrc_running && /etc/init.d/keymaps restart --nodeps
+            # systemd not needed here, this script runs before vconsole-setup
+        fi
     fi
 }
 
@@ -152,7 +142,6 @@ main() {
         return 0
     fi
 
-    setup_settingsd
     setup_desktop
     setup_password
     setup_keymap
@@ -161,7 +150,6 @@ main() {
     # /etc/profile.env variables
     setup_locale
     argent_setup_autologin
-    argent_setup_motd
     argent_setup_vt_autologin
     argent_setup_oem_livecd
 }

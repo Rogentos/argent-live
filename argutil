@@ -2,7 +2,6 @@
 
 # Initial version by wolfden.
 # Later changes by Enlik <poczta-sn at gazeta.pl>.
-# Later canges by Stefan Cristian B.
 
 # last change: 9.03.2012
 # most important changes to last version:
@@ -376,8 +375,7 @@ function grub_restore
 function horner
 {
 
-# Quick system info gatherer written for Sabayon GNU/Linux and
-# adapted for Kogaion and Argent GNU/Linux
+# Quick system info gatherer written for Argent GNU/Linux
 #(http://argentlinux.org)
 # Copyright 2008 Richard Edward Horner
 # Last modified 2008-11-26
@@ -485,7 +483,7 @@ function files_pastebin
 function system_pastebin
 {
     echo -n "Please wait, it is going to take a while..."
-    local PASTE_TMP=/tmp/argutil-tmp
+    local PASTE_TMP=/tmp/sabutil-tmp
 
     >"$PASTE_TMP" || {
 	echo "Oh no! I can't create temporary file... Aborting."
@@ -540,7 +538,7 @@ function fdisk_pastebin
 {
     is_root || return # fdisk -l
 
-    local PASTE_TMP=/tmp/argutil-tmp
+    local PASTE_TMP=/tmp/sabutil-tmp
 
     >"$PASTE_TMP" || {
 	echo "Oh no! I can't create temporary file... Aborting."
@@ -586,7 +584,7 @@ function rclog_pastebin
 
 function rcupdate_pastebin
 {
-    local PASTE_TMP=/tmp/argutil-tmp
+    local PASTE_TMP=/tmp/sabutil-tmp
 
     >"$PASTE_TMP" || {
 	echo "Oh no! I can't create temporary file... Aborting."

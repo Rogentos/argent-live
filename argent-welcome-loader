@@ -1,9 +1,9 @@
 #!/bin/sh
 
 ARGENT_LOADER="/usr/bin/xdg-open"
-ARGENT_URL=${ARGENT_URL:-http://www.argentlinux.org?install_welcome=1}
+ARGENT_URL=${ARGENT_URL:-http://www.argent.org?install_welcome=1}
 
-# load Sabayon URL
+# load Argent URL
 [[ -x "${ARGENT_LOADER}" ]] && ${ARGENT_LOADER} ${ARGENT_URL} &
 
 # remove myself from autostart

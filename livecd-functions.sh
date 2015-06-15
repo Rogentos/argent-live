@@ -316,7 +316,7 @@ get_ifbus() {
 }
 
 livecd_rev_string() {
-	# See Sabayon #2522, cannot use /usr/bin/rev because
+	# See Argent #2522, cannot use /usr/bin/rev because
 	# /usr might not be mounted
 	local copy=${1}
 	len=${#copy}
