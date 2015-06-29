@@ -63,6 +63,9 @@ argent_setup_autologin() {
     if [ -f "$LIGHTDM_FILE" ]; then
         sed -i "s/autologin-user=.*/autologin-user=${LIVE_USER}/" $LIGHTDM_FILE
         sed -i "/^#.*autologin-user=/ s/^#//" $LIGHTDM_FILE
+	sed -i "s/pam-service=.*/pam-service=lightdm-autologin/" $LIGHTDM_FILE
+	sed -i "/^#.*pam-service=/ s/^#//" $LIGHTDM_FILE
+	sed -i "/^#.*autologin-user-timeout=/ s/^#//" $LIGHTDM_FILE
     fi
 
     # Setup correct login session
