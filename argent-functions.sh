@@ -5,6 +5,7 @@ CUSTOM_GDM_FILE="/etc/gdm/custom.conf"
 KDM_FILE="/usr/share/config/kdm/kdmrc"
 LXDM_FILE="/etc/lxdm/lxdm.conf"
 LIGHTDM_FILE="/etc/lightdm/lightdm.conf"
+SLIM_FILE="/etc/slim.conf"
 OEM_FILE="/etc/oemlive.sh"
 OEM_FILE_NEW="/etc/oem/liveboot.sh"
 LIVE_USER_GROUPS="audio bumblebee cdrom cdrw clamav console entropy games \
@@ -63,6 +64,13 @@ argent_setup_autologin() {
     if [ -f "$LIGHTDM_FILE" ]; then
         sed -i "s/autologin-user=.*/autologin-user=${LIVE_USER}/" $LIGHTDM_FILE
         sed -i "/^#.*autologin-user=/ s/^#//" $LIGHTDM_FILE
+    fi
+
+    if [ -f "$SLIM_FILE" ]; then
+	set -i "s/default_user.*/default_user ${LIVE_USER}/" $SLIM_FILE
+	sed -i "/^#.*default_user/ s/^#//" $SLIM_FILE
+	set -i "s/auto_login.*/auto_login yes/" $SLIM_FILE
+	sed -i "/^#.*auto_login/ s/^#//" $SLIM_FILE
     fi
 
     # Setup correct login session
