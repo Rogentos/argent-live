@@ -1,7 +1,7 @@
 #!/bin/sh
 
 ARGENT_LOADER="/usr/bin/xdg-open"
-ARGENT_URL=${ARGENT_URL:-http://www.argent.org?install_welcome=1}
+ARGENT_URL=${ARGENT_URL:-http://www.argentlinux.io?install_welcome=1}
 
 # load Argent URL
 [[ -x "${ARGENT_LOADER}" ]] && ${ARGENT_LOADER} ${ARGENT_URL} &
